@@ -13,7 +13,7 @@ module.exports = cds.service.impl(async function () {
     this.on('getcallfromodata', async (req) => 
     {
         debugger
-         console.log("startttttt")
+        //  console.log("startttttt")
         var po = req.data.po_number
         var contract = req.data.contract_no
         var vendor = req.data.vendor_code
