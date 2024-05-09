@@ -14,8 +14,8 @@ module.exports = cds.service.impl(async function () {
     {
         debugger
         //  console.log("startttttt")
-        var po = req.data.po_number
-        var contract = req.data.contract_no
+        // var po = req.data.po_number
+        // var contract = req.data.contract_no
         var vendor = req.data.vendor_code
         console.log("venddddd",vendor)
         var BPA = await cds.connect.to('INVOICE_DEST');
