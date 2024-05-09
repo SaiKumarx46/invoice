@@ -1,0 +1,234 @@
+{
+    "_version": "1.59.0",
+    "sap.app": {
+        "id": "advancedpayment",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:lrop",
+            "version": "1.13.3",
+            "toolsId": "d8a7bf85-dd38-42a3-a4e1-6489992d8bef"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "odata/v4/my/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "odataVersion": "4.0"
+                }
+            }
+        },
+        "crossNavigation": {
+            "inbounds": {
+                "advance-display": {
+                    "semanticObject": "advance",
+                    "action": "display",
+                    "title": "{{flpTitle}}",
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    }
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": false,
+        "dependencies": {
+            "minUI5Version": "1.123.1",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.ushell": {},
+                "sap.fe.templates": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "advancedpayment.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "synchronizationMode": "None",
+                    "operationMode": "Server",
+                    "autoExpandSelect": true,
+                    "earlyRequests": true
+                }
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "style/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "routes": [
+                {
+                    "pattern": ":?query:",
+                    "name": "poheaderList",
+                    "target": "poheaderList"
+                },
+                {
+                    "pattern": "poheader({key}):?query:",
+                    "name": "poheaderObjectPage",
+                    "target": "poheaderObjectPage"
+                }
+            ],
+            "targets": {
+                "poheaderList": {
+                    "type": "Component",
+                    "id": "poheaderList",
+                    "name": "sap.fe.templates.ListReport",
+                    "options": {
+                        "settings": {
+                            "entitySet": "poheader",
+                            "navigation": {
+                                "poheader": {
+                                    "detail": {
+                                        "route": "poheaderObjectPage"
+                                    }
+                                }
+                            },
+                            "controlConfiguration": {
+                                "@com.sap.vocabularies.UI.v1.LineItem": {
+                                    "actions": {
+                                        "3": {
+                                            "press": "advancedpayment.ext.controller.Create.create_click",
+                                            "visible": true,
+                                            "enabled": true,
+                                            "requiresSelection": false,
+                                            "text": "With-PO Advance payment request"
+                                        }
+                                    }
+                                }
+                            },
+                            "initialLoad": "Enabled"
+                        }
+                    }
+                },
+                "poheaderObjectPage": {
+                    "type": "Component",
+                    "id": "poheaderObjectPage",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings": {
+                            "entitySet": "poheader",
+                            "navigation": {},
+                            "content": {
+                                "body": {
+                                    "sections": {
+                                        "Totals": {
+                                            "template": "advancedpayment.ext.fragment.Totals",
+                                            "title": "Totals",
+                                            "type": "XMLFragment"
+                                        },
+                                        "Addediteminfo": {
+                                            "template": "advancedpayment.ext.fragment.Addediteminfo",
+                                            "position": {
+                                                "placement": "Before",
+                                                "anchor": "Totals"
+                                            },
+                                            "title": "Addediteminfo",
+                                            "type": "XMLFragment"
+                                        },
+                                        "Attachment": {
+                                            "template": "advancedpayment.ext.fragment.Attachment",
+                                            "position": {
+                                                "placement": "After",
+                                                "anchor": "Totals"
+                                            },
+                                            "title": "Attachment",
+                                            "type": "XMLFragment"
+                                        },
+                                        "PoLineitems": {
+                                            "template": "advancedpayment.ext.fragment.PoLineitems",
+                                            "position": {
+                                                "placement": "Before",
+                                                "anchor": "Addediteminfo"
+                                            },
+                                            "title": "PoLineitems",
+                                            "type": "XMLFragment"
+                                        },
+                                        "Payment": {
+                                            "template": "advancedpayment.ext.fragment.Payment",
+                                            "position": {
+                                                "placement": "Before",
+                                                "anchor": "PoLineitems"
+                                            },
+                                            "title": "Payment",
+                                            "type": "XMLFragment"
+                                        },
+                                        "LineItems": {
+                                            "template": "advancedpayment.ext.fragment.LineItems",
+                                            "position": {
+                                                "placement": "Before",
+                                                "anchor": "Payment"
+                                            },
+                                            "title": "LineItems",
+                                            "type": "XMLFragment"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "extends": {
+            "extensions": {
+                "sap.ui.controllerExtensions": {
+                    "sap.fe.templates.ObjectPage.ObjectPageController": {
+                        "controllerName": "advancedpayment.ext.controller.ObjectPage"
+                    }
+                }
+            }
+        }
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "transactional"
+    },
+    "sap.cloud": {
+        "public": true,
+        "service": "approuter"
+    }
+}

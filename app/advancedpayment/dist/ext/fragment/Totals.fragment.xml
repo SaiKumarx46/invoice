@@ -1,0 +1,65 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:macros="sap.fe.macros">
+	<VBox class="right-aligned">
+		<!-- <Button core:require="{ handler: 'advancedpayment/ext/fragment/Totals'}" text="Totals" press="handler.onPress" /> -->
+		<HBox>
+		<HBox class = "tott">
+        	<Label id="Tot" text="Totals  " labelFor="input-a"/>
+			</HBox>
+			<HBox class = "totval" >
+        	<Input id="input-a"  width="150px"/>
+			</HBox>
+
+			<HBox class = "totvalinr" >
+			<Text text="INR"/>
+			</HBox>
+    	</HBox>
+		<HBox >
+		<HBox class="cgst">
+        	<Label id="cgstid" text="CGST: " labelFor="input-b"/>
+			</HBox>
+			<HBox  class="cgstval">
+			<Input id="input-b"  width="150px"/>
+			</HBox>
+        	
+			<HBox  class="cgstinr" >
+			<Text text="INR"/>
+			</HBox>
+			
+    	</HBox>
+
+		
+		<HBox >
+		<HBox  class="sgst">
+		<Label id="sgstid" text="SGST" labelFor="input-c"/>
+		</HBox>
+        	
+			<HBox class="sgstval">
+		<Input id="input-c"  width="150px"/>
+			</HBox>
+        	
+			<HBox class="sgstinr">
+			<Text text="INR"/>
+			</HBox>
+			
+    	</HBox>
+		
+		<HBox>	
+
+		<HBox class="totalvalue" >
+		<Label id="totinvalueid" text="Total in Value:" labelFor="input-d"/>
+		</HBox>
+        	
+			<HBox class="totalvalueinp" >
+			<Input id="input-d"  width="150px"/>
+			</HBox>
+        	
+
+			<HBox class="totalvalueinr" >
+			<Text text="INR"/>
+			</HBox>
+			
+    	</HBox>
+		
+	</VBox>
+	
+</core:FragmentDefinition>

@@ -1,0 +1,1 @@
+sap.ui.define(["sap/m/MessageToast"],function(e){"use strict";return{create_click:function(s){e.show("Custom handler invoked.")}}});
