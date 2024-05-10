@@ -11,41 +11,42 @@ sap.ui.define([
             onInit: function () {
 
             },
-            onBeforeRendering: function (oEvent) {
-                debugger
-                // var id = sap.ui.getCore().byId('container-advancepaymentform---advancepayment--input-1').mProperties.value;
-                // var path = this.byId("table").mBindingInfos.items.binding;
-                // path.filter(
-                //     new sap.ui.model.Filter({
-                //         path: "po_number",
-                //         operator: sap.ui.model.FilterOperator.EQ,
-                //         value1: ''
-                //     })
-                // );
+            // onBeforeRendering: function (oEvent) {
+            //     debugger
+            //     var id = sap.ui.getCore().byId('container-advancepaymentform---advancepayment--input-1').mProperties.value;
+            //     var path = this.byId("table").mBindingInfos.items.binding;
+            //     path.filter(
+            //         new sap.ui.model.Filter({
+            //             path: "po_number",
+            //             operator: sap.ui.model.FilterOperator.EQ,
+            //             value1: ''
+            //         })
+            //     );
 
-                // var path = this.base.getView().mAggregations.content[0].mAggregations.sections[6].mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].mAggregations.content.mAggregations.items[0].mBindingInfos.items.binding;
+            //     // var path = this.base.getView().mAggregations.content[0].mAggregations.sections[6].mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].mAggregations.content.mAggregations.items[0].mBindingInfos.items.binding;
 
-                // var poLineitempath = this.base.getView().mAggregations.content[0].mAggregations.sections[3].mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].mAggregations.content.mAggregations.items[0].mBindingInfos.items.binding;
-                // poLineitempath.filter(
-                //     new sap.ui.model.Filter({
-                //         path: "po_number",
-                //         operator: sap.ui.model.FilterOperator.EQ,
-                //         value1: id
-                //     })
-                // ); 
-
-
-                // var Addediteminfopath = this.byId("helo").mBindingInfos.items.binding;
-                // Addediteminfopath.filter(
-                //     new sap.ui.model.Filter({
-                //         path: "po_number",
-                //         operator: sap.ui.model.FilterOperator.EQ,
-                //         value1: id
-                //     })
-                // ); 
+            //     // var poLineitempath = this.base.getView().mAggregations.content[0].mAggregations.sections[3].mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].mAggregations.content.mAggregations.items[0].mBindingInfos.items.binding;
+            //     // poLineitempath.filter(
+            //     //     new sap.ui.model.Filter({
+            //     //         path: "po_number",
+            //     //         operator: sap.ui.model.FilterOperator.EQ,
+            //     //         value1: id
+            //     //     })
+            //     // ); 
 
 
-            },
+            //     // var Addediteminfopath = this.byId("helo").mBindingInfos.items.binding;
+            //     // Addediteminfopath.filter(
+            //     //     new sap.ui.model.Filter({
+            //     //         path: "po_number",
+            //     //         operator: sap.ui.model.FilterOperator.EQ,
+            //     //         value1: id
+            //     //     })
+            //     // ); 
+
+
+            // },
+           
             Submit: async function (oEvent) {
 
                 debugger
@@ -66,7 +67,8 @@ sap.ui.define([
 
                 debugger
                 var fname = "getcallfromodata";
-                let fname1 = sap.ui.getCore().byId("__section4-innerGrid").getModel().bindContext(`/${fname}(...)`);
+                // let fname1 = sap.ui.getCore().byId("__section4-innerGrid").getModel().bindContext(`/${fname}(...)`);
+                let fname1 = this.getView().getModel().bindContext(`/${fname}(...)`);
                 fname1.setParameter('po_number', po_number);
                 fname1.setParameter('contract_no', contract_no);
                 fname1.setParameter('vendor_code', vendor_code);
@@ -100,12 +102,12 @@ sap.ui.define([
                     // var path1 = window.location.href;
                     // 	var regex = /poheader='(\d+)'/;
                     // 	var match = path1.match(regex);
-                    	var key = sap.ui.getCore().byId('container-advancepaymentform---advancepayment--input-1').mProperties.value;
+                    var key = sap.ui.getCore().byId('container-advancepaymentform---advancepayment--input-1').mProperties.value;
                     var data = {
                         mediaType: item.getMediaType(),
                         fileName: item.getFileName(),
                         size: item.getFileObject().size,
-                        po_number :key
+                        po_number: key
 
                     };
                     var settings = {
@@ -279,15 +281,12 @@ sap.ui.define([
                 return iconUrl;
             },
 
-            onRowSelected: async function (oEvent) 
-            {
+            onRowSelected: async function (oEvent) {
                 debugger
 
                 var count = oEvent.getSource().getItems();
-                for (let i = 0; i < count.length; i++) 
-                {
-                    if (count[i].getSelected() == true) 
-                    {
+                for (let i = 0; i < count.length; i++) {
+                    if (count[i].getSelected() == true) {
                         let poNum = sap.ui.getCore().byId('container-advancepaymentform---advancepayment--input-1').mProperties.value;
                         let lineItemId = oEvent.oSource.oParent.mAggregations.content[0].mAggregations.items[0].mAggregations.cells[0].mProperties.text;
                         let funcname = "fm1";
@@ -296,9 +295,36 @@ sap.ui.define([
                         oFunc.setParameter('content', lineItemId);
                         oFunc.setParameter('type', 'checked');
                         await oFunc.execute();
+                        sap.ui.getCore().byId('container-advancepaymentform---advancepayment--helo').mBindingInfos.items.binding.refresh();
+                        var total_amount = 0;
+                        var total_Sgst = 0;
+                        var total_Cgst = 0;
+                        let count1 = oEvent.oSource.oParent.mAggregations.content[0].mAggregations.items;
+                        for (let i = 0; i < count1.length; i++) {
+                            debugger
+                            var amount = parseFloat(count1[i].mAggregations.cells[10].mProperties.text)
+                            total_amount = parseFloat(total_amount) + amount;
+                            var cgst_percentage = parseFloat(count1[i].mAggregations.cells[6].mProperties.text);
+                            var sgst_percentage = parseFloat(count1[i].mAggregations.cells[7].mProperties.text);
+                            var res_cgst = JSON.stringify((amount * cgst_percentage) / 100);
+                            var res_sgst = JSON.stringify((amount * sgst_percentage) / 100);
+                            let funcname = "cgst";
+                            var oFunc = oEvent.oSource.getParent().getModel().bindContext(`/${funcname}(...)`);
+                            oFunc.setParameter('poNum', sap.ui.getCore().byId('container-advancepaymentform---advancepayment--input-1').mProperties.value);
+                            oFunc.setParameter('itemId', count[i].mAggregations.cells[0].mProperties.text);
+                            oFunc.setParameter('cgst', res_cgst);
+                            oFunc.setParameter('sgst', res_sgst);
+                            await oFunc.execute();
+                            var Sgst = parseFloat(count1[i].mAggregations.cells[9].mProperties.text)
+                            total_Sgst = parseFloat(total_Sgst) + Sgst;
+                            var Cgst = parseFloat(count1[i].mAggregations.cells[8].mProperties.text)
+                            total_Cgst = parseFloat(total_Cgst) + Cgst;
+                        }
+                        this.byId("input-a").setValue(total_amount);
+                        this.byId("input-9").setValue(total_Cgst);
+                        this.byId("input-9").setValue(total_Sgst);
                     }
-                    else 
-                    {
+                    else {
                         let poNum = sap.ui.getCore().byId('container-advancepaymentform---advancepayment--input-1').mProperties.value;
                         let lineItemId = oEvent.oSource.oParent.mAggregations.content[0].mAggregations.items[0].mAggregations.cells[0].mProperties.text;
                         let funcname = "fm1";
@@ -307,38 +333,16 @@ sap.ui.define([
                         oFunc.setParameter('content', lineItemId);
                         oFunc.setParameter('type', 'unchecked');
                         await oFunc.execute();
+                        sap.ui.getCore().byId('container-advancepaymentform---advancepayment--helo').mBindingInfos.items.binding.refresh();
+                        // this.byId("input-a").setValue('');
+                        // this.byId("input-9").setValue('');
+                        // this.byId("input-9").setValue('');
                     }
                 }
-                sap.ui.getCore().byId('container-advancepaymentform---advancepayment--helo').mBindingInfos.items.binding.refresh();
-
-
-
-                var total_amount = 0;
-                var total_Sgst = 0;
-                var total_Cgst = 0;
-                let count1 = oEvent.oSource.oParent.oParent.mAggregations.items;
-                for (let i = 0; i < count1.length; i++) 
-                {
-                    debugger
-                    var amount = parseFloat(count1[i].mAggregations.cells[10].mProperties.text)
-                    total_amount = parseFloat(total_amount) + amount;
-                    var cgst_percentage = parseFloat(count1[i].mAggregations.cells[6].mProperties.text);
-                    var sgst_percentage = parseFloat(count1[i].mAggregations.cells[7].mProperties.text);
-                    var res_cgst = JSON.stringify((amount * cgst_percentage) / 100);
-                    var res_sgst = JSON.stringify((amount * sgst_percentage) / 100);
-                    let funcname = "cgst";
-                    var oFunc = oEvent.oSource.getParent().getModel().bindContext(`/${funcname}(...)`);
-                    oFunc.setParameter('poNum', poNum);
-                    oFunc.setParameter('itemId', count[i].mAggregations.cells[0].mProperties.text);
-                    oFunc.setParameter('cgst', res_cgst);
-                    oFunc.setParameter('sgst', res_sgst);
-                    await oFunc.execute();
-                    var Sgst = parseFloat(count1[i].mAggregations.cells[9].mProperties.text)
-                    total_Sgst = parseFloat(total_Sgst) + Sgst;
-                    var Cgst = parseFloat(count1[i].mAggregations.cells[8].mProperties.text)
-                    total_Cgst = parseFloat(total_Cgst) + Cgst;
-                }    
                 
+
+
+
                 // let array = [];
                 // let item_array = [];
                 // for (let i = 0; i < count.length; i++) {
@@ -370,6 +374,8 @@ sap.ui.define([
 
 
                 // }
+
+
 
 
 
@@ -429,7 +435,7 @@ sap.ui.define([
                 this.byId("input-9").setValue(total_Sgst);
                 // sap.ui.getCore().byId('advancedpayment::poheaderObjectPage--fe::CustomSection::Totals-innerGrid').oParent.mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].oParent.mAggregations.content[0].mAggregations.content.mAggregations.items[0].mAggregations.items[1].mAggregations.items[0].setValue(total_amount);
                 // sap.ui.getCore().byId('advancedpayment::poheaderObjectPage--fe::CustomSection::Totals-innerGrid').oParent.mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].oParent.mAggregations.content[0].mAggregations.content.mAggregations.items[1].mAggregations.items[1].mAggregations.items[0].setValue(total_Cgst);
-                sap.ui.getCore().byId('advancedpayment::poheaderObjectPage--fe::CustomSection::Totals-innerGrid').oParent.mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].oParent.mAggregations.content[0].mAggregations.content.mAggregations.items[2].mAggregations.items[1].mAggregations.items[0].setValue(total_Sgst);
+                // sap.ui.getCore().byId('advancedpayment::poheaderObjectPage--fe::CustomSection::Totals-innerGrid').oParent.mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].oParent.mAggregations.content[0].mAggregations.content.mAggregations.items[2].mAggregations.items[1].mAggregations.items[0].setValue(total_Sgst);
                 // sap.ui.getCore().byId('advancedpayment::poheaderObjectPage--fe::CustomSection::Totals-innerGrid').oParent.mAggregations._grid.mAggregations.content[0].mAggregations._grid.mAggregations.content[0].oParent.mAggregations.content[0].mAggregations.content.mAggregations.items[3].mAggregations.items[1].mAggregations.items[0].setValue(totalval);
             }
 

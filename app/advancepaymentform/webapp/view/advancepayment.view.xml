@@ -154,7 +154,7 @@
                                                 <Text text="SGST Value" />
                                             </Column>
                                             <Column>
-                                                <Text text="Amount" visible="false"/>
+                                                <Text text="Amount" visible="false" />
                                             </Column>
                                         </columns>
                                         <items>
@@ -170,6 +170,7 @@
                                                     <Text text="{sgst_percentage}" />
                                                     <Text text="{cgst_value}" />
                                                     <Text text="{sgst_value}" />
+                                                    <Text text="{amount}" />
                                                 </cells>
                                             </ColumnListItem>
                                         </items>
